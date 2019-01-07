@@ -6,13 +6,17 @@ import design_patterns.design_patterns_head_first.StrategyPattern.MallardDuck;
 import design_patterns.design_patterns_head_first.StrategyPattern.ModelDuck;
 
 /**
- * Hello world!
+ * Test design patterns!
  *
  */
 public class App 
 {
     public static void main( String[] args )
     {
+        StrategyPattern();
+    }
+    
+    public static void StrategyPattern(){
         Duck mallard = new MallardDuck();
         mallard.performFly();
         mallard.performQuack();
