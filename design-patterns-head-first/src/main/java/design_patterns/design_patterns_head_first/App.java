@@ -6,6 +6,8 @@ import design_patterns.design_patterns_head_first.DecoratorPattern.Beverage;
 import design_patterns.design_patterns_head_first.DecoratorPattern.Espresso;
 import design_patterns.design_patterns_head_first.DecoratorPattern.HouseBlend;
 import design_patterns.design_patterns_head_first.DecoratorPattern.Mocha;
+import design_patterns.design_patterns_head_first.SimpleFactoryPattern.PizzaStore;
+import design_patterns.design_patterns_head_first.SimpleFactoryPattern.SimplePizzaFactory;
 import design_patterns.design_patterns_head_first.StrategyPattern.Duck;
 import design_patterns.design_patterns_head_first.StrategyPattern.FlyRocketPowered;
 import design_patterns.design_patterns_head_first.StrategyPattern.MallardDuck;
@@ -22,6 +24,7 @@ public class App
         //StrategyPattern();
         ObserverPattern();
         DecoratorPattern();
+        SimpleFactory();
     }
     
     public static void StrategyPattern(){
@@ -50,6 +53,13 @@ public class App
         System.out.println(beverage2.getDescription()+" $"+beverage2.cost());
         beverage2 = new Mocha(beverage2);
         System.out.println(beverage2.getDescription()+" $"+beverage2.cost());
+        
+    }
+    
+    public static void SimpleFactory(){
+        
+        PizzaStore pizzaStore = new PizzaStore(new SimplePizzaFactory());
+        pizzaStore.orderPizza("clam");
         
     }
 }
