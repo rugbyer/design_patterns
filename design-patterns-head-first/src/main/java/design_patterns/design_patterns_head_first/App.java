@@ -9,6 +9,9 @@ import design_patterns.design_patterns_head_first.DecoratorPattern.Mocha;
 import design_patterns.design_patterns_head_first.SimpleFactoryPattern.NYStylePizzaStore;
 import design_patterns.design_patterns_head_first.SimpleFactoryPattern.PizzaStore;
 import design_patterns.design_patterns_head_first.SimpleFactoryPattern.SimplePizzaFactory;
+import design_patterns.design_patterns_head_first.SingletonPattern.SingletonStatic;
+import design_patterns.design_patterns_head_first.SingletonPattern.SingletonSyn;
+import design_patterns.design_patterns_head_first.SingletonPattern.SingletonSynDC;
 import design_patterns.design_patterns_head_first.StrategyPattern.Duck;
 import design_patterns.design_patterns_head_first.StrategyPattern.FlyRocketPowered;
 import design_patterns.design_patterns_head_first.StrategyPattern.MallardDuck;
@@ -26,6 +29,7 @@ public class App
         ObserverPattern();
         DecoratorPattern();
         FactoryMethod();
+        Singleton();
     }
     
     public static void StrategyPattern(){
@@ -63,5 +67,13 @@ public class App
         pizzaStore.orderPizza("clam");
         pizzaStore.orderPizza("cheese");
         
+    }
+    
+    public static void Singleton(){
+        SingletonSyn instanceSyn = SingletonSyn.getInstance();
+        
+        SingletonStatic instanceStatic = SingletonStatic.getInstance();
+        
+        SingletonSynDC instanceDC = SingletonSynDC.getInstace();
     }
 }
