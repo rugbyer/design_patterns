@@ -2,6 +2,13 @@ package design_patterns.design_patterns_head_first;
 
 import ObserverPattern.CurrentConditionsDisplay;
 import ObserverPattern.WeatherData;
+import design_patterns.design_patterns_head_first.CommandPattern.Light;
+import design_patterns.design_patterns_head_first.CommandPattern.LightOffCommand;
+import design_patterns.design_patterns_head_first.CommandPattern.LightOnCommand;
+import design_patterns.design_patterns_head_first.CommandPattern.RemoteControl;
+import design_patterns.design_patterns_head_first.CommandPattern.SimpleRemoteControl;
+import design_patterns.design_patterns_head_first.CommandPattern.Stereo;
+import design_patterns.design_patterns_head_first.CommandPattern.StereoOnWithCDCommand;
 import design_patterns.design_patterns_head_first.DecoratorPattern.Beverage;
 import design_patterns.design_patterns_head_first.DecoratorPattern.Espresso;
 import design_patterns.design_patterns_head_first.DecoratorPattern.HouseBlend;
@@ -30,6 +37,7 @@ public class App
         DecoratorPattern();
         FactoryMethod();
         Singleton();
+        Command();
     }
     
     public static void StrategyPattern(){
@@ -61,6 +69,7 @@ public class App
         
     }
     
+    //工厂模式区分简单工厂，工厂方法，抽象工厂，简单工厂在simple commit里，已覆盖
     public static void FactoryMethod(){
         
         PizzaStore pizzaStore = new NYStylePizzaStore();
@@ -70,10 +79,48 @@ public class App
     }
     
     public static void Singleton(){
+        
         SingletonSyn instanceSyn = SingletonSyn.getInstance();
         
         SingletonStatic instanceStatic = SingletonStatic.getInstance();
         
-        SingletonSynDC instanceDC = SingletonSynDC.getInstace();
+        SingletonSynDC instanceDC = SingletonSynDC.getInstance();
+    }
+    
+    public static void Command(){
+        SimpleRemoteControl remote = new SimpleRemoteControl();
+        Light light = new Light("");
+        LightOnCommand lightOn = new LightOnCommand(light);
+        
+        remote.setCommand(lightOn);
+        remote.buttonWasPressed();
+        
+        RemoteControl remoteControl = new RemoteControl();
+        Light livingRoomLight=new Light("Living Room");
+        Light kitchenLight = new Light("Kitchen");
+        Stereo stereo = new Stereo("Living Room");
+        
+        LightOnCommand livingRoomLightOn = new LightOnCommand(livingRoomLight);
+        LightOffCommand livingRooLightOff = new LightOffCommand(livingRoomLight);
+        
+        LightOnCommand kitchenLightOn = new LightOnCommand(kitchenLight);
+        LightOffCommand kitchenLightOff = new LightOffCommand(kitchenLight);
+        
+        StereoOnWithCDCommand stereoOnWithCommand = new StereoOnWithCDCommand(stereo);
+        
+        remoteControl.setCommand(0, livingRoomLightOn, livingRooLightOff);
+        remoteControl.setCommand(1, kitchenLightOn, kitchenLightOff);
+        remoteControl.setCommand(3, stereoOnWithCommand, stereoOnWithCommand);
+        System.out.println(remoteControl.toString()+"@@");
+        remoteControl.onButtonWasPushed(0);
+        remoteControl.offButtonWasPushed(0);
+        remoteControl.onButtonWasPushed(1);
+        remoteControl.offButtonWasPushed(1);
+        remoteControl.onButtonWasPushed(2);
+        remoteControl.offButtonWasPushed(2);
+        remoteControl.onButtonWasPushed(3);
+        remoteControl.offButtonWasPushed(3);
+        
+        
     }
 }

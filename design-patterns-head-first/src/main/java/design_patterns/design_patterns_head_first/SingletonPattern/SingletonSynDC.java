@@ -6,7 +6,7 @@ public class SingletonSynDC {
     
     private SingletonSynDC (){};
     
-    public static SingletonSynDC getInstace(){
+    public static SingletonSynDC getInstance(){
         if(instance ==null){
             synchronized(SingletonSynDC.class){
                 if(instance ==null){
