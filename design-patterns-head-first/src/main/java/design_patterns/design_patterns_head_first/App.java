@@ -2,6 +2,8 @@ package design_patterns.design_patterns_head_first;
 
 import ObserverPattern.CurrentConditionsDisplay;
 import ObserverPattern.WeatherData;
+import design_patterns.design_patterns_head_first.AdapterPattern.TurkeyAdapter;
+import design_patterns.design_patterns_head_first.AdapterPattern.WildTurkey;
 import design_patterns.design_patterns_head_first.CommandPattern.Light;
 import design_patterns.design_patterns_head_first.CommandPattern.LightOffCommand;
 import design_patterns.design_patterns_head_first.CommandPattern.LightOnCommand;
@@ -23,6 +25,8 @@ import design_patterns.design_patterns_head_first.StrategyPattern.Duck;
 import design_patterns.design_patterns_head_first.StrategyPattern.FlyRocketPowered;
 import design_patterns.design_patterns_head_first.StrategyPattern.MallardDuck;
 import design_patterns.design_patterns_head_first.StrategyPattern.ModelDuck;
+import design_patterns.design_patterns_head_first.TemplatePattern.CaffeineBeverageWithHook;
+import design_patterns.design_patterns_head_first.TemplatePattern.CoffeeWithHook;
 
 /**
  * Test design patterns!
@@ -38,6 +42,8 @@ public class App
         FactoryMethod();
         Singleton();
         Command();
+        AdapterPattern();
+        TemplatePattern();
     }
     
     public static void StrategyPattern(){
@@ -122,5 +128,30 @@ public class App
         remoteControl.offButtonWasPushed(3);
         
         
+    }
+    
+    public static void AdapterPattern(){
+        design_patterns.design_patterns_head_first.AdapterPattern.MallardDuck duck = 
+                new design_patterns.design_patterns_head_first.AdapterPattern.MallardDuck();
+        WildTurkey turkey = new WildTurkey();
+        design_patterns.design_patterns_head_first.AdapterPattern.Duck turkeyAdapter = 
+                new TurkeyAdapter(turkey);
+        System.out.println("The turkey says:");
+        turkey.gobble();
+        turkey.fly();
+        
+        System.out.println("The duck says:");
+        duck.quack();
+        duck.fly();
+        
+        System.out.println("The TurkeyAdapter says:");
+        turkeyAdapter.quack();
+        turkeyAdapter.fly();
+        
+    }
+    
+    public static void TemplatePattern(){
+        CaffeineBeverageWithHook coffeeHook = new CoffeeWithHook();
+        coffeeHook.prepareReciple();
     }
 }
