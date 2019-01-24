@@ -1,5 +1,7 @@
 package design_patterns.design_patterns_head_first;
 
+import java.lang.reflect.Proxy;
+
 import ObserverPattern.CurrentConditionsDisplay;
 import ObserverPattern.WeatherData;
 import design_patterns.design_patterns_head_first.AdapterPattern.TurkeyAdapter;
@@ -15,12 +17,16 @@ import design_patterns.design_patterns_head_first.DecoratorPattern.Beverage;
 import design_patterns.design_patterns_head_first.DecoratorPattern.Espresso;
 import design_patterns.design_patterns_head_first.DecoratorPattern.HouseBlend;
 import design_patterns.design_patterns_head_first.DecoratorPattern.Mocha;
+import design_patterns.design_patterns_head_first.ProxyPattern.OwnerInvocationHandler;
+import design_patterns.design_patterns_head_first.ProxyPattern.PersonBean;
 import design_patterns.design_patterns_head_first.SimpleFactoryPattern.NYStylePizzaStore;
 import design_patterns.design_patterns_head_first.SimpleFactoryPattern.PizzaStore;
 import design_patterns.design_patterns_head_first.SimpleFactoryPattern.SimplePizzaFactory;
 import design_patterns.design_patterns_head_first.SingletonPattern.SingletonStatic;
 import design_patterns.design_patterns_head_first.SingletonPattern.SingletonSyn;
 import design_patterns.design_patterns_head_first.SingletonPattern.SingletonSynDC;
+import design_patterns.design_patterns_head_first.StatePattern.GumballMachine;
+import design_patterns.design_patterns_head_first.StatePattern.GumballMonitor;
 import design_patterns.design_patterns_head_first.StrategyPattern.Duck;
 import design_patterns.design_patterns_head_first.StrategyPattern.FlyRocketPowered;
 import design_patterns.design_patterns_head_first.StrategyPattern.MallardDuck;
@@ -44,6 +50,8 @@ public class App
         Command();
         AdapterPattern();
         TemplatePattern();
+        StatePattern();
+        ProxyPattern();
     }
     
     public static void StrategyPattern(){
@@ -153,5 +161,30 @@ public class App
     public static void TemplatePattern(){
         CaffeineBeverageWithHook coffeeHook = new CoffeeWithHook();
         coffeeHook.prepareReciple();
+    }
+    
+    public static void StatePattern(){
+        GumballMachine gumballMachine = new GumballMachine("pk",5);
+        System.out.println(gumballMachine);
+        GumballMonitor monitor = new GumballMonitor(gumballMachine);
+        monitor.report();
+        gumballMachine.insertQuarter();
+        monitor.report();
+        gumballMachine.turnCrank();
+        monitor.report();
+        
+        System.out.println(gumballMachine);
+        
+        gumballMachine.insertQuarter();
+        gumballMachine.turnCrank();
+        gumballMachine.insertQuarter();
+        gumballMachine.turnCrank();
+    }
+    public static PersonBean getOwnProxy(PersonBean person){
+        return (PersonBean)Proxy.newProxyInstance(person.getClass().getClassLoader(), 
+                person.getClass().getInterfaces(), new OwnerInvocationHandler(person));
+    } 
+    public static void ProxyPattern(){
+        
     }
 }
